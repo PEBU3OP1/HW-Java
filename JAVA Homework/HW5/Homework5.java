@@ -12,6 +12,8 @@ public class Homework5 {
         // System.out.println(filling_hashmap());
         // System.out.println(adding_to_map(filling_hashmap()));
         // System.out.println(task_6(filling_hashmap()));
+        
+        System.out.println(task_7(filling_hashmap()));
     }
 
     public static HashMap filling_hashmap() { // Задание 1,2
@@ -58,6 +60,11 @@ public class Homework5 {
             map.put(new_map.getKey(), new_map.getValue() + "!");
         }
 
+        return map;
+    }
+    public static HashMap task_7(HashMap<String, String> map) { //Задание 7, почему не работает?
+
+        map.forEach((k, v) -> v = v + " !");
         return map;
     }
 }
