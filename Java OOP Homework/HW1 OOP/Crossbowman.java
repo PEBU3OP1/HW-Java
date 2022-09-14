@@ -1,63 +1,15 @@
-public class Crossbowman {
-    private String name;
-    private int attack;
-    private int defence;
-    private int shots;
-    private int [] damage = new int[2];
-    private int health;
-    private int speed;
-    private static boolean delivery = false;
-    private static boolean magic = false;
+public class Crossbowman extends BaseHero {
 
-    public Crossbowman(){
-        name = "Crossbowman";
-        attack = 6;
-        defence = 3;
-        shots = 16;
-        damage[0] = 2;damage[1] = 3;
-        health = 10;
-        speed = 4;
-        
+    public Crossbowman() {
+        super.setName("Crossbowman");
+        super.setAttack(6);
+        super.setDefence(3);
+        super.setShots(16);
+        super.setDamage(2);
+        super.setHealth(10);
+        super.setSpeed(4);
+        super.setDelivery(false);
+        super.setMagic(false);
     }
 
-    public Crossbowman(String name){
-        this();
-        this.name = name;
-    }
-
-    public String getName(){
-        return this.name;
-    }
-    public int getAttack(){
-        return this.attack;
-    }
-    public int getDeffence(){
-        return this.defence;
-    }
-    public int getShots(){
-        return this.shots;
-    }
-    public String getDamage(){
-        return String.format("%d - %d", damage[0], damage[1]);
-    }
-    public int getHealth(){
-        return this.health;
-    }
-    public int getSpeed(){
-        return this.speed;
-    }
-    public static boolean getDelivery(){
-        return delivery;
-    }
-    public static boolean getMagic(){
-        return magic;
-    }
-
-    public String getAllCharact(){
-        
-        return String.format("Имя: %s, Атака: %d, Защита: %d, Выстрелы: %d, Урон: %d - %d, Здоровье: %d, Скорость: %d, Доставка: %s, Магия: %s", name, attack, defence, shots, damage[0], damage[1], health, speed, delivery, magic);
-    }
-
-
-    
 }
