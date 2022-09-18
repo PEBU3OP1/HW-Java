@@ -45,6 +45,7 @@ public class Program {
                 String text = in.nextLine();
                 String results_of_steps_white = "";
                 String results_of_steps_red = "";
+                String results_final = "";
 
                 if (text.equals("q")) {
                     break;
@@ -54,7 +55,7 @@ public class Program {
                     System.out.println("\t\t\t\t\tRound " + step);
                     System.out.println(
                             "--------------------------------------------------------------------------------");
-                    System.out.println("White Band\t\t\t\t\t\t\tRed Band");
+                    
 
                     for (int i = 0; i < whiteBand.size(); i++) {
 
@@ -71,17 +72,18 @@ public class Program {
                         }
 
                         if (whiteBand.get(i).condition().length() >= 24) {
-
-                            System.out.println(whiteBand.get(i).condition() + "\t\t|\t\t" + redBand.get(i).condition());
+    
+                            results_final += whiteBand.get(i).condition() + "\t\t|\t\t" + redBand.get(i).condition()+"\n";
                         } else {
-
-                            System.out
-                                    .println(whiteBand.get(i).condition() + "\t\t\t|\t\t" + redBand.get(i).condition());
+    
+                            results_final += whiteBand.get(i).condition() + "\t\t\t|\t\t" + redBand.get(i).condition()+"\n";
                         }
                     }
-                    System.out.println();
                     System.out.println(results_of_steps_red);
                     System.out.println(results_of_steps_white);
+                    System.out.println();
+                    System.out.println("White Band\t\t\t\t\t\t\tRed Band");
+                    System.out.println(results_final);
                 }
             }
             step++;
