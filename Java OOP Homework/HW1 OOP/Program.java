@@ -1,4 +1,8 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Program
@@ -6,32 +10,83 @@ import java.util.ArrayList;
 public class Program {
 
     public static void main(String[] args) {
-        /* 
-        ArrayList<Peasant> psnt_list = new ArrayList<>();
-        ArrayList<Bandit> bndt_list = new ArrayList<>();
-        ArrayList<Sniper> snpr_list = new ArrayList<>();
-        ArrayList<Wizard> wzrd_list = new ArrayList<>();
-        ArrayList<Spearman> sprmn_list = new ArrayList<>();
-        ArrayList<Crossbowman> crsbmn_list = new ArrayList<>();
-        ArrayList<Monk> mnk_lList = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            psnt_list.add(new Peasant());
-            bndt_list.add(new Bandit());
-            snpr_list.add(new Sniper());
-            wzrd_list.add(new Wizard());
-            sprmn_list.add(new Spearman());
-            crsbmn_list.add(new Crossbowman());
-            mnk_lList.add(new Monk());
+        int step = 1;
+        ArrayList<BaseHero> whiteBand = new ArrayList<>();
+        ArrayList<BaseHero> redBand = new ArrayList<>();
+
+        whiteBand.add(new Peasant());
+        whiteBand.add(new Bandit());
+        whiteBand.add(new Sniper(redBand));
+        whiteBand.add(new Monk(whiteBand));
+
+        redBand.add(new Peasant());
+        redBand.add(new Bandit());
+        redBand.add(new Sniper(whiteBand));
+        redBand.add(new Monk(redBand));
+
+        Scanner in = new Scanner(System.in);
+
+        while (true) {
+            if (step == 1) {
+                System.out.println("\t\t\t\t\tRound 1");
+                System.out.println("--------------------------------------------------------------------------------");
+                System.out.println("White Band\t\t\t\t\t\t\tRed Band");
+                for (int i = 0; i < whiteBand.size(); i++) {
+
+                    if (whiteBand.get(i).condition().length() > 22) {
+                        System.out.println(whiteBand.get(i).condition() + "\t\t|\t\t" + redBand.get(i).condition());
+                    } else {
+
+                        System.out.println(whiteBand.get(i).condition() + "\t\t\t|\t\t" + redBand.get(i).condition());
+                    }
+                }
+            } else {
+
+                String text = in.nextLine();
+                String results_of_steps_white = "";
+                String results_of_steps_red = "";
+
+                if (text.equals("q")) {
+                    break;
+                }
+
+                else {
+                    System.out.println("\t\t\t\t\tRound " + step);
+                    System.out.println(
+                            "--------------------------------------------------------------------------------");
+                    System.out.println("White Band\t\t\t\t\t\t\tRed Band");
+
+                    for (int i = 0; i < whiteBand.size(); i++) {
+
+                        String white_target = whiteBand.get(i).step();
+                        String red_target = redBand.get(i).step();
+
+                        if (whiteBand.get(i).getName().equals("Monk") || whiteBand.get(i).getName().equals("Sniper")) {
+                            results_of_steps_white += "Персонаж whiteBand " + whiteBand.get(i).getName()
+                                    + " стреляет/лечит " + white_target + "\n";
+                        }
+                        if (redBand.get(i).getName().equals("Monk") || redBand.get(i).getName().equals("Sniper")) {
+                            results_of_steps_red += "Персонаж RedBand " + redBand.get(i).getName() + " стреляет/лечит "
+                                    + red_target + "\n";
+                        }
+
+                        if (whiteBand.get(i).condition().length() >= 24) {
+
+                            System.out.println(whiteBand.get(i).condition() + "\t\t|\t\t" + redBand.get(i).condition());
+                        } else {
+
+                            System.out
+                                    .println(whiteBand.get(i).condition() + "\t\t\t|\t\t" + redBand.get(i).condition());
+                        }
+                    }
+                    System.out.println();
+                    System.out.println(results_of_steps_red);
+                    System.out.println(results_of_steps_white);
+                }
+            }
+            step++;
         }
-        for (Peasant peasant : psnt_list) { //и так для каждого списка
-            System.out.println(peasant.getAllCharact());
-            
-        }
-        for (int i = 0; i < 5; i++) {
-            System.out.println(psnt_list.get(i).getAllCharact());//перечисляем все списки
-            
-        }
-        */
 
     }
+
 }

@@ -12,5 +12,9 @@ public class Wizard extends BaseHero{
         super.setDelivery(false);
         super.setMagic(true);
     }
-
+    @Override
+    public String step() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

@@ -1,3 +1,5 @@
+import java.util.List;
+
 public abstract class BaseHero implements Actions {
     
     private String name;
@@ -9,6 +11,7 @@ public abstract class BaseHero implements Actions {
     private int speed;
     private boolean delivery;
     private boolean magic;
+    private List<BaseHero> list;
     
     public BaseHero() {
     }
@@ -31,7 +34,8 @@ public abstract class BaseHero implements Actions {
     }
     public void setDamage(int damage) {this.damage[1] = damage;}
     public String getDamage() {return String.format("%d - %d", damage[0], damage[1]);}
-
+    public int getDamage(int strike){return damage[strike];}
+    public int getDamage_int(){return this.damage[1];}
 
 
     public void setHealth(int health) {this.health = health;}
@@ -46,6 +50,7 @@ public abstract class BaseHero implements Actions {
     public void setMagic(boolean magic) {this.magic = magic;}
     public boolean getMagic() {return this.magic;}
 
+    public List<BaseHero> getlist(){return this.list;}
 
     public String getAllCharact() {
 
@@ -53,6 +58,9 @@ public abstract class BaseHero implements Actions {
                 "Имя: %s, Атака: %d, Защита: %d, Выстрелы: %d, Урон: %d - %d, Здоровье: %d, Скорость: %d, Доставка: %s, Магия: %s",
                 name, attack, defence, shots, damage[0], damage[1], health, speed, delivery, magic);
     }
+
+    public BaseHero(List<BaseHero> side){this.list = side;}
+
 
     @Override
     public float hit() {
@@ -80,8 +88,10 @@ public abstract class BaseHero implements Actions {
 
     @Override
     public String condition() {
-        // TODO Auto-generated method stub
+        return name + " H: " + health + " D: " + defence + " A: " + attack + "";
+    }
+    @Override
+    public String step(){
         return null;
     }
-
 }

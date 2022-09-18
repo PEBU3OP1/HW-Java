@@ -12,5 +12,9 @@ public class Spearman extends BaseHero{
         super.setDelivery(false);
         super.setMagic(false);
     }
-    
+    @Override
+    public String step() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

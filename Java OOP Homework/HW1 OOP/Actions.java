@@ -15,6 +15,7 @@ public interface Actions {
     boolean status();
     boolean changePos();
     String condition();
+    String step();
     
 
 

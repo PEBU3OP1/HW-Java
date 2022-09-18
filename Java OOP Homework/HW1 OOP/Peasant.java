@@ -9,6 +9,11 @@ public class Peasant extends BaseHero {
         super.setSpeed(3);
         super.setDelivery(true);
         super.setMagic(false);
+        
     }
-
+    @Override
+    public String step() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

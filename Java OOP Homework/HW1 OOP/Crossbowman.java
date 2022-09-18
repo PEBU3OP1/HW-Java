@@ -12,4 +12,9 @@ public class Crossbowman extends BaseHero {
         super.setMagic(false);
     }
 
+    @Override
+    public String step() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
