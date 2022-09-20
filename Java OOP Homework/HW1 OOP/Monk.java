@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class Monk extends BaseHero {
 
-    public Monk(List<BaseHero> side){
+    public Monk(List<BaseHero> side, int x, int y){
         super(side);
         super.setName("Monk");
         super.setAttack(12);
@@ -14,7 +14,8 @@ public class Monk extends BaseHero {
         super.setSpeed(5);
         super.setDelivery(false);
         super.setMagic(true);
-        
+        super.setStatus("-");
+        super.setPos(x, y);
     }
         
     
@@ -23,6 +24,8 @@ public class Monk extends BaseHero {
         Random rnd = new Random();
         int res_rnd = rnd.nextInt(super.getlist().size());
         super.getlist().get(res_rnd).setHealth((super.getlist().get(res_rnd).getHealth() - this.getDamage_int()));
+        super.setStatus(String.valueOf(res_rnd));
+       
         String result = super.getlist().get(res_rnd).getName();
         return result;
     }

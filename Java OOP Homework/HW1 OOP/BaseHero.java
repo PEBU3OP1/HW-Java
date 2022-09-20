@@ -12,6 +12,9 @@ public abstract class BaseHero implements Actions {
     private boolean delivery;
     private boolean magic;
     private List<BaseHero> list;
+    private boolean state;
+    private String status;
+    private Moves pos;
     
     public BaseHero() {
     }
@@ -52,6 +55,14 @@ public abstract class BaseHero implements Actions {
 
     public List<BaseHero> getlist(){return this.list;}
 
+    public void setStatus(String status){this.status = status;}
+    public String getStatus() {return this.status;}
+
+
+    public void setPos (int x, int y){pos = new Moves(x, y); }
+    // public String getPos() {return String.valueOf(this.pos.x) + String.valueOf(this.pos.y);}
+   
+
     public String getAllCharact() {
 
         return String.format(
@@ -60,6 +71,7 @@ public abstract class BaseHero implements Actions {
     }
 
     public BaseHero(List<BaseHero> side){this.list = side;}
+    // public BaseHero(List<BaseHero> side, int x, int y){this.list = side; pos.x = x; pos.y = y;}
 
 
     @Override
@@ -88,7 +100,7 @@ public abstract class BaseHero implements Actions {
 
     @Override
     public String condition() {
-        return name + " H: " + health + " D: " + defence + " A: " + attack + "";
+        return name + "; Hlth: " + health + "; Dmg: " + damage[1] + "; Attck: " + attack + "; hit/heal: " + status + "; Pos (" + pos.x+", " + pos.y + ")";
     }
     @Override
     public String step(){
