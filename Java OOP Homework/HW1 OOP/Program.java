@@ -9,127 +9,128 @@ import java.util.Scanner;
  */
 public class Program {
 
-    public static void main(String[] args) {
-        int step = 1;
-        ArrayList<BaseHero> whiteBand = new ArrayList<>();
-        ArrayList<BaseHero> redBand = new ArrayList<>();
-        
-        
-
-        whiteBand.add(new Peasant(redBand, 0,0));
-        whiteBand.add(new Bandit(redBand,1,0));
-        whiteBand.add(new Sniper(redBand,2,0));
-        whiteBand.add(new Monk(whiteBand,3,0));
-
+    public static List band_ad(ArrayList band1, ArrayList band2, int x, String side) {
+        band1.add(new Peasant(band1, 0, x));
+        band1.add(new Bandit(band2, 1, x, side));
+        band1.add(new Sniper(band2, 2, x));
+        band1.add(new Monk(band1, 3, x));
         Random rnd = new Random();
         for (int i = 0; i < 6; i++) {
             switch (rnd.nextInt(7)) {
                 case 0:
-                    whiteBand.add(new Peasant(redBand, i +4, 0));
+                    band1.add(new Peasant(band1, i + 4, x));
                     break;
                 case 1:
-                    whiteBand.add(new Bandit(redBand, i +4, 0));
+                    band1.add(new Bandit(band2, i + 4, x, side));
                     break;
                 case 2:
-                    whiteBand.add(new Sniper(redBand, i +4, 0));
+                    band1.add(new Sniper(band2, i + 4, x));
                     break;
                 case 3:
-                    whiteBand.add(new Crossbowman(redBand, i +4, 0));
+                    band1.add(new Crossbowman(band2, i + 4, x));
                     break;
                 case 4:
-                    whiteBand.add(new Spearman(redBand, i +4, 0));
+                    band1.add(new Spearman(band2, i + 4, x));
                     break;
                 case 5:
-                    whiteBand.add(new Wizard(whiteBand, i +4, 0));
+                    band1.add(new Wizard(band1, i + 4, x));
                     break;
                 default:
-                    whiteBand.add(new Monk(whiteBand, i +4, 0));
+                    band1.add(new Monk(band1, i + 4, x));
             }
         }
+        return band1;
+    }
 
-        redBand.add(new Peasant(whiteBand,0,9));
-        redBand.add(new Bandit(whiteBand,1,9));
-        redBand.add(new Sniper(whiteBand,2,9));
-        redBand.add(new Monk(redBand,3,9));
-
-        for (int i = 0; i < 6; i++) {
-            switch (rnd.nextInt(4)) {
-                case 0:
-                    redBand.add(new Peasant(whiteBand, i +4, 9 ));
-                    break;
-                case 1:
-                    redBand.add(new Bandit(whiteBand, i +4, 9));
-                    break;
-                case 2:
-                    redBand.add(new Sniper(whiteBand, i +4, 9));
-                    break;
-                case 3:
-                    redBand.add(new Crossbowman(whiteBand, i +4, 9));
-                    break;
-                case 4:
-                    redBand.add(new Spearman(whiteBand, i +4, 9));
-                    break;
-                case 5:
-                    redBand.add(new Wizard(redBand, i +4, 9));
-                    break;
-                default:
-                    redBand.add(new Monk(redBand, i +4, 9));
+    public static void cleaner_fld(String[][] field) {
+        for (int i = 0; i < field.length; i++) {
+            for (int j = 0; j < field.length; j++) {
+                field[i][j] = Playing_field.middle();
             }
         }
+    }
 
+    public static void game_view(ArrayList band1, ArrayList band2, int step, String[][] field) {
+        System.out.println(String.format("\t\t\t\t\t\t\t\t\t %d Round", step));
+
+        System.out.println(
+                "-------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("White Band\t\t\t\t\t\t\t\t\t\t\tRed Band\n");
+        Playing_field.top();
+        System.out.println();
+        for (int i = 0; i < field.length; i++) {
+
+            for (int j = 0; j < field.length; j++) {
+                Character new_name_white = ((BaseHero) band1.get(j)).getName().charAt(0);
+                Character new_name_red = ((BaseHero) band2.get(j)).getName().charAt(0);
+                field[((BaseHero) band1.get(j)).getPosY()][((BaseHero) band1.get(j)).getPosX()] = Playing_field
+                        .middle(AnsiColors.ANSI_BLUE + new_name_white.toString()+ AnsiColors.ANSI_RESET);
+                field[((BaseHero) band2.get(j)).getPosY()][((BaseHero) band2.get(j)).getPosX()] = Playing_field
+                        .middle(AnsiColors.ANSI_RED +new_name_red.toString()+ AnsiColors.ANSI_RESET);
+
+                if (field[i][j] == null) {
+
+                    field[i][j] = Playing_field.middle();
+                }
+
+                System.out.print(field[i][j]);
+            }
+
+            if (((BaseHero) band1.get(i)).condition().length() >= 64) {
+
+                System.out.print(("\t\t" + i + "\t" + (AnsiColors.ANSI_BLUE + ((BaseHero) band1.get(i)).condition()+ AnsiColors.ANSI_RESET) + "\t\t\t|\t\t"
+                        + i + "\t" + (AnsiColors.ANSI_RED +((BaseHero) band2.get(i)).condition())+ AnsiColors.ANSI_RESET));
+
+                
+                } else {
+
+                    System.out.print("\t\t" + i + "\t" + (AnsiColors.ANSI_BLUE + ((BaseHero) band1.get(i)).condition()+ AnsiColors.ANSI_RESET) + "\t\t\t\t|\t\t"
+                            + i + "\t" + (AnsiColors.ANSI_RED +((BaseHero) band2.get(i)).condition()+ AnsiColors.ANSI_RESET));
+                }
+                System.out.println();
+            }
+            Playing_field.bottom();
+    }
+    
+
+    public static void main(String[] args) {
+        int step = 1;
+        ArrayList<BaseHero> whiteBand = new ArrayList<>();
+        ArrayList<BaseHero> redBand = new ArrayList<>();
+        String[][] playfld = new String[10][10];
         Scanner in = new Scanner(System.in);
 
-        if (step == 1) {
-            System.out.println("\t\t\t\t\t\t\t\t\tFirst Round");
-        } 
-        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println("White Band\t\t\t\t\t\t\t\t\t\t\tRed Band\n");
-        for (int i = 0; i < whiteBand.size(); i++) {
-
-            if (whiteBand.get(i).condition().length() >= 64) {
-
-                System.out.println(whiteBand.get(i).condition() + "\t\t|\t\t" + redBand.get(i).condition());
-            } else {
-
-                System.out.println(whiteBand.get(i).condition() + "\t\t\t|\t\t" + redBand.get(i).condition());
-            }
-        }
+        band_ad(whiteBand, redBand, 0, "white");
+        band_ad(redBand, whiteBand, 9, "red");
+        game_view(whiteBand, redBand, step, playfld);
 
         while (true) {
 
             String text = in.nextLine();
-            String results_final = "";
 
             if (text.equals("q")) {
                 break;
             }
 
             else {
-                System.out.println("\t\t\t\t\t\t\t\t\tRound " + step);
-                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 for (int j = 0; j < whiteBand.size(); j++) {
 
+                    cleaner_fld(playfld);
                     whiteBand.get(j).step();
                     redBand.get(j).step();
-                }
-                for (int k = 0; k < whiteBand.size(); k++) {
 
-                    if (whiteBand.get(k).condition().length() >= 61) {
-
-                        results_final += String.valueOf(k) + "  " + whiteBand.get(k).condition() + "\t\t|\t\t" + String.valueOf(k) + "  " + redBand.get(k).condition()
-                                + "\n";
-                    } else {
-
-                        results_final += String.valueOf(k) + "  " + whiteBand.get(k).condition() + "\t\t\t|\t\t" + String.valueOf(k) + "  " + redBand.get(k).condition()
-                                + "\n";
-                    }
                 }
 
-                System.out.println();
-                System.out.println("White Band\t\t\t\t\t\t\t\t\t\t\tRed Band\n");
-                System.out.println(results_final);
+                for (int z = 0; z < whiteBand.size(); z++) {
+
+                    whiteBand.get(z).checkstate();
+                    redBand.get(z).checkstate();
+                }
+
+                game_view(whiteBand, redBand, step, playfld);
             }
             step++;
+
         }
     }
 

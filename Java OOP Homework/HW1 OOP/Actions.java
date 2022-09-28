@@ -10,10 +10,9 @@
 
 public interface Actions {
 
-    float hit();
-    float get_Hit(float damage);
+    float hit(int a);
     boolean status();
-    boolean changePos();
+    String checkstate();
     String condition();
     String step();
     
