@@ -1,8 +1,13 @@
 package vehicleTypes;
+
+import Interfaces.mainInterface;
+import parts_of_vehicles.Chassis;
+import parts_of_vehicles.Engine;
+
 /**
  * Vehicle
  */
-public abstract class Vehicle {
+public abstract class Vehicle implements mainInterface{
 
     // BMW G 310 R - мотоцикл
     // KAWASAKI NINJA 400 - мотоцикл
@@ -31,20 +36,35 @@ public abstract class Vehicle {
     // DF Helicopters DF334  - вертолет
 
     protected int maxspeed;
-    protected int weight;
-    protected int horsepower;
-    protected int capacity;
+    protected float weight;
+    protected float[] dimensions = {0,0,0};
     protected String brand;
     protected String model;
-    protected String engineType;
-    protected float engineVolume;
-    protected String vihicleType;
+    protected String environment;
+    protected final Engine engine;
+    protected final Chassis chassis;
 
-    public Vehicle(String brand, String model, String engine){
+    public Vehicle(String brand, String model, Engine engine , Chassis chassis, int maxSpeed, String environment, float[] dimensions){
         this.brand = brand;
         this.model = model;
-        this.engineType = engine;
-    };
+        this.engine = engine;
+        this.chassis = chassis;
+        this.maxspeed = maxSpeed;
+        this.environment =environment;
+        this.dimensions = dimensions;
+
+
+    }
+    @Override
+    public int getMaxspeed() {
+        
+        return this.maxspeed;
+    }
+    @Override
+    public String getEnvironment() {
+        
+        return this.environment;
+    }
     
 
 }
